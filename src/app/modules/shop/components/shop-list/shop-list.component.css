@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.create-button-container {
+    position:fixed;
+	bottom: 0;
+	right:0px;
+    padding: 1.45rem;
+}
