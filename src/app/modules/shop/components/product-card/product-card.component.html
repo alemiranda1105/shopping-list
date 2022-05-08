@@ -16,9 +16,11 @@
         </mat-card-content>
         <mat-card-footer>
             <div class="buttons">
-                <button mat-raised-button color="primary">
+                <a
+                [routerLink]="['/details/' + product.id]"
+                mat-raised-button color="primary">
                     Details
-                </button>
+                </a>
                 <button mat-raised-button color="accent">
                     Edit
                 </button>

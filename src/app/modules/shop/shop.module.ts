@@ -4,13 +4,15 @@ import { ShopListComponent } from './components/shop-list/shop-list.component';
 import { ShopRoutingModule } from './shop-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 
 
 @NgModule({
   declarations: [
     ShopListComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ProductDetailsComponent
   ],
   imports: [
     CommonModule,
