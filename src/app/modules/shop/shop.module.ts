@@ -5,6 +5,7 @@ import { ShopRoutingModule } from './shop-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { MapPipe } from './pipes/map.pipe';
 
 
 
@@ -12,7 +13,8 @@ import { ProductDetailsComponent } from './components/product-details/product-de
   declarations: [
     ShopListComponent,
     ProductCardComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    MapPipe
   ],
   imports: [
     CommonModule,
