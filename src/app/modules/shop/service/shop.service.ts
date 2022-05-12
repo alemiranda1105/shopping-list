@@ -28,9 +28,19 @@ export class ShopService {
   }
 
   getProductById(id: string): Observable<Product> {
-    console.log(id);
     const product = this.productLists.filter(p => p.id === id)[0];
     return of(product);
+  }
+
+  updateProduct(product: Product): Observable<Product> {
+     this.productLists = this.productLists.filter(p => p.id !== product.id)
+     this.productLists.push(product)
+     this.productLists.sort((a,b) => {
+       if(a.id < b.id) return -1
+       if(a.id > b.id) return 1
+       return 0
+     })
+     return of(product)
   }
 
 }

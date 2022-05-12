@@ -52,7 +52,31 @@ export class ProductFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-
+    this.product = {
+      ...this.product,
+      ...this.productForm.value
+    }
+    var invalid = []
+    const controls = this.productForm.controls
+    for(let name in controls) {
+      if(controls[name].invalid) {
+        invalid.push(name)
+      }
+    }
+    if(invalid.length === 0) {
+      if(this.newProduct) {
+        // Implement create product
+      } else {
+        this.shopService.updateProduct(this.product!)
+        .subscribe(res => {
+          if(res.id) {
+            this.router.navigate(['/edit', {id: res.id}])
+          } else {
+            this.router.navigate(['/'])
+          }
+        })
+      }
+    }
   }
 
 }
