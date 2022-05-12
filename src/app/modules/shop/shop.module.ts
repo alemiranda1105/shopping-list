@@ -6,6 +6,8 @@ import { MaterialModule } from '../material/material.module';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { MapPipe } from './pipes/map.pipe';
+import { ProductFormComponent } from './components/product-form/product-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -14,12 +16,14 @@ import { MapPipe } from './pipes/map.pipe';
     ShopListComponent,
     ProductCardComponent,
     ProductDetailsComponent,
-    MapPipe
+    MapPipe,
+    ProductFormComponent,
   ],
   imports: [
     CommonModule,
     ShopRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class ShopModule { }

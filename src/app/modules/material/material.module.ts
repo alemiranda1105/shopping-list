@@ -9,6 +9,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatOptionModule } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
+
 
 @NgModule({
   declarations: [],
@@ -24,6 +27,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatSlideToggleModule,
+    MatOptionModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule { }

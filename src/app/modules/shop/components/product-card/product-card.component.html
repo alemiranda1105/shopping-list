@@ -21,9 +21,11 @@
                 mat-raised-button color="primary">
                     Details
                 </a>
-                <button mat-raised-button color="accent">
+                <a
+                [routerLink]="['/edit/' + product.id]"
+                mat-raised-button color="accent">
                     Edit
-                </button>
+                </a>
                 <button mat-button color="warn">
                     <mat-icon>delete</mat-icon>
                 </button>
