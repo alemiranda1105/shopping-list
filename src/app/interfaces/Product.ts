@@ -5,3 +5,10 @@ export interface Product {
     supermarket: string,
     notes: string
 }
+
+export interface NewProduct {
+    name: string
+    quantity: number,
+    supermarket: string,
+    notes: string
+}

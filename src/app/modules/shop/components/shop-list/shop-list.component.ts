@@ -23,4 +23,13 @@ export class ShopListComponent implements OnInit {
     .subscribe(res => this.productList = res);
   }
 
+  deleteProduct(id: string): void {
+    this.shopService.deleteProduct(id)
+    .subscribe(res => {
+      if(res) {
+        this.getAllProducts();
+      }
+    });
+  }
+
 }

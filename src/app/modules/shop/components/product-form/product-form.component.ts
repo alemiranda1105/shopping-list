@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
-import { Product } from 'src/app/interfaces/Product';
+import { NewProduct, Product } from 'src/app/interfaces/Product';
 import { ShopService } from '../../service/shop.service';
 
 @Component({
@@ -12,7 +12,9 @@ import { ShopService } from '../../service/shop.service';
 })
 export class ProductFormComponent implements OnInit {
   product?: Product
-  newProduct: boolean = true
+  newProduct?: NewProduct
+
+  isNew: boolean = true
 
   productForm: FormGroup
 
@@ -40,22 +42,18 @@ export class ProductFormComponent implements OnInit {
           this.router.navigate(['/']);
         }
         this.product = product;
-        this.newProduct = false;
+        this.isNew = false;
         this.productForm.controls['name'].setValue(product.name);
         this.productForm.controls['notes'].setValue(product.notes);
         this.productForm.controls['quantity'].setValue(product.quantity);
         this.productForm.controls['supermarket'].setValue(product.supermarket);
       });
     } else {
-      this.newProduct = true;
+      this.isNew = true;
     }  
   }
 
   onSubmit(): void {
-    this.product = {
-      ...this.product,
-      ...this.productForm.value
-    }
     var invalid = []
     const controls = this.productForm.controls
     for(let name in controls) {
@@ -64,9 +62,25 @@ export class ProductFormComponent implements OnInit {
       }
     }
     if(invalid.length === 0) {
-      if(this.newProduct) {
-        // Implement create product
+      if(this.isNew) {
+        this.newProduct = {
+          ...this.productForm.value
+        }
+
+        this.shopService.createProduct(this.newProduct!)
+        .subscribe(res => {
+          if(res.id) {
+            this.router.navigate(['/edit', {id: res.id}])
+          } else {
+            this.router.navigate(['/'])
+          }
+        })
       } else {
+        this.product = {
+          ...this.product,
+          ...this.productForm.value
+        }
+        
         this.shopService.updateProduct(this.product!)
         .subscribe(res => {
           if(res.id) {

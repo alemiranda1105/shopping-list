@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Product } from 'src/app/interfaces/Product';
+import { NewProduct, Product } from 'src/app/interfaces/Product';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +32,15 @@ export class ShopService {
     return of(product);
   }
 
+  createProduct(product: NewProduct): Observable<Product> {
+    let newProduct: Product = {
+      id: this.productLists.length + "",
+      ...product
+    }
+    this.productLists.push(newProduct)
+    return of(newProduct)
+  }
+
   updateProduct(product: Product): Observable<Product> {
      this.productLists = this.productLists.filter(p => p.id !== product.id)
      this.productLists.push(product)
@@ -41,6 +50,11 @@ export class ShopService {
        return 0
      })
      return of(product)
+  }
+
+  deleteProduct(id: string): Observable<boolean> {
+    this.productLists = this.productLists.filter(p => p.id !== id)
+    return of(true)
   }
 
 }
