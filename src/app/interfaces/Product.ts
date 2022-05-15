@@ -10,5 +10,6 @@ export interface NewProduct {
     name: string
     quantity: number,
     supermarket: string,
-    notes: string
+    notes: string,
+    user_id: string
 }

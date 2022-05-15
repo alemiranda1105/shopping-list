@@ -68,12 +68,13 @@ export class ProductFormComponent implements OnInit {
         }
 
         this.shopService.createProduct(this.newProduct!)
-        .subscribe(res => {
+        .then(res => {
           if(res.id) {
             this.router.navigate(['/edit', {id: res.id}])
           } else {
             this.router.navigate(['/'])
           }
+          
         })
       } else {
         this.product = {

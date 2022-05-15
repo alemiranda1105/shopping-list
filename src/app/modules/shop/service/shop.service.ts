@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { NewProduct, Product } from 'src/app/interfaces/Product';
 
 import { Firestore, DocumentData } from '@angular/fire/firestore';
-import { collection, CollectionReference, doc, DocumentReference, getDoc, getDocs, query, where } from 'firebase/firestore';
+import { addDoc, collection, CollectionReference, doc, DocumentReference, getDoc, getDocs, query, where } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -38,13 +38,11 @@ export class ShopService {
     return product;
   }
 
-  createProduct(product: NewProduct): Observable<Product> {
-    let newProduct: Product = {
-      id: this.productLists.length + "",
-      ...product
-    }
-    this.productLists.push(newProduct)
-    return of(newProduct)
+  async createProduct(product: NewProduct): Promise<Product> {
+    product.user_id = "1"
+    let created = await addDoc(this.db, product)
+    let newProduct: Product = Object.assign(await this.getProductById(created.id))
+    return newProduct
   }
 
   updateProduct(product: Product): Observable<Product> {
