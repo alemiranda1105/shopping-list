@@ -1,4 +1,5 @@
 <div class="container">
+    <h1 *ngIf="productList.length <= 0">No tiene productos añadidos</h1>
     <div *ngFor="let p of productList">
         <app-product-card [product]="p" (deleteProductEvent)="deleteProduct($event)"></app-product-card>
     </div>
