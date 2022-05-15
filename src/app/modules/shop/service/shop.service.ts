@@ -2,29 +2,31 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { NewProduct, Product } from 'src/app/interfaces/Product';
 
+import { Firestore } from '@angular/fire/firestore';
+import { collection, CollectionReference, getDoc, getDocs, query, where } from 'firebase/firestore';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
-  productLists: Product[];
+  productLists: Product[] = [];
+  db: CollectionReference<import("@angular/fire/firestore").DocumentData>;
 
-  constructor() {
-    this.productLists = [];
-    for(let i = 0; i <= 10; i++) {
-      this.productLists.push(
-        {
-          id: `${i}`,
-          name: `Product ${i}`,
-          quantity: i,
-          supermarket: `Supermarket ${i}`,
-          notes: `Note ${i}`
-        }
-      )
-    }
+  constructor(
+    private firestore: Firestore
+  ) {
+    this.db = collection(this.firestore, 'products')
   }
-
-  getAllProducts(): Observable<Product[]> {
-    return of(this.productLists);
+  getAllProducts() {
+    let q = query(this.db, where('user_id', '==', '1'))
+    getDocs(q)
+    .then(docs => {
+      docs.forEach(d => {
+        let product = {...d.data(), id: d.id} as Product
+        this.productLists.push(product)
+      })
+    })
+    return of(this.productLists)
   }
 
   getProductById(id: string): Observable<Product> {
