@@ -7,13 +7,15 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { GoogleButtonComponent } from './components/google-button/google-button.component';
 
 
 @NgModule({
   declarations: [
     LoginPageComponent,
     LoginFormComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    GoogleButtonComponent
   ],
   imports: [
     CommonModule,

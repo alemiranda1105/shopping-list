@@ -9,3 +9,13 @@
     text-decoration: none;
     color: white;
 }
+
+mat-toolbar-row {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+#logout {
+    justify-self: end;
+}

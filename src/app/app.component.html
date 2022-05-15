@@ -1,7 +1,12 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="navbar">
   <mat-toolbar-row>
       <a routerLink="['/']" id="homelink">Shopping list</a>
-      <a (click)="logOut()">Log out</a>
+      <a mat-icon-button (click)="logOut()" id="logout">
+        Log out
+        <mat-icon>
+          exit_to_app
+        </mat-icon>
+      </a>
   </mat-toolbar-row>
 </mat-toolbar>
 <div class="app-container">

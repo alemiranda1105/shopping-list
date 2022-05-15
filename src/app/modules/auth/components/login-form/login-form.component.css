@@ -1,19 +1,15 @@
-button {
-    background-color: #5eccd6;
-    border-radius: 20px;
-    color: #fff;
-    padding: 0 50px;
-}
-
 form {
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 200px;
-    width: 300px;
+    width: 90%;
 }
 
 mat-form-field {
     width: 100%;
+}
+
+.container {
+    margin: 1.5rem;
 }
