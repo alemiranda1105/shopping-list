@@ -4,23 +4,29 @@ import { NewProduct, Product } from 'src/app/interfaces/Product';
 
 import { Firestore, DocumentData } from '@angular/fire/firestore';
 import { addDoc, collection, CollectionReference, deleteDoc, doc, DocumentReference, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
+import { AuthService } from '../../auth/service/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
+  userId: string;
+
   productLists: Product[] = [];
   db: CollectionReference<DocumentData>;
 
   constructor(
-    private firestore: Firestore
+    private firestore: Firestore,
+    private readonly authService: AuthService
   ) {
     this.db = collection(this.firestore, 'products')
+    this.userId = this.authService.getCurrentUser()
   }
 
   getAllProducts(): Observable<Product[]> {
+    this.authService.getCurrentUser();
     this.productLists = []
-    let q = query(this.db, where('user_id', '==', '1'))
+    let q = query(this.db, where('user_id', '==', this.userId))
     getDocs(q)
     .then(docs => {
       docs.forEach(d => {
@@ -39,7 +45,7 @@ export class ShopService {
   }
 
   async createProduct(product: NewProduct): Promise<Product> {
-    product.user_id = "1"
+    product.user_id = this.userId
     let created = await addDoc(this.db, product)
     let newProduct: Product = Object.assign(await this.getProductById(created.id))
     return newProduct

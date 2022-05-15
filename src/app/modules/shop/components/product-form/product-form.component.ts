@@ -70,7 +70,7 @@ export class ProductFormComponent implements OnInit {
         this.shopService.createProduct(this.newProduct!)
         .then(res => {
           if(res.id) {
-            this.router.navigate(['/edit', {id: res.id}])
+            this.router.navigate(['/shop/edit', {id: res.id}])
           } else {
             this.router.navigate(['/'])
           }
@@ -85,7 +85,7 @@ export class ProductFormComponent implements OnInit {
         this.shopService.updateProduct(this.product!)
         .then(res => {
           if(res.id) {
-            this.router.navigate(['/edit', {id: res.id}])
+            this.router.navigate(['/shop/edit', {id: res.id}])
           } else {
             this.router.navigate(['/'])
           }

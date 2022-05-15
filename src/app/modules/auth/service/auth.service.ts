@@ -28,4 +28,8 @@ export class AuthService {
     return signOut(this.auth)
   }
 
+  getCurrentUser() {
+    return this.auth.currentUser?.uid ?? ""
+  }
+
 }
