@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { NewProduct, Product } from 'src/app/interfaces/Product';
 
 import { Firestore, DocumentData } from '@angular/fire/firestore';
-import { addDoc, collection, CollectionReference, doc, DocumentReference, getDoc, getDocs, query, where } from 'firebase/firestore';
+import { addDoc, collection, CollectionReference, doc, DocumentReference, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -45,15 +45,15 @@ export class ShopService {
     return newProduct
   }
 
-  updateProduct(product: Product): Observable<Product> {
-     this.productLists = this.productLists.filter(p => p.id !== product.id)
-     this.productLists.push(product)
-     this.productLists.sort((a,b) => {
-       if(a.id < b.id) return -1
-       if(a.id > b.id) return 1
-       return 0
-     })
-     return of(product)
+  async updateProduct(product: Product): Promise<Product> {
+    const toUpdate = doc(this.firestore, 'products', product.id)
+    await updateDoc(toUpdate, {...product})
+    .then(res => console.log(res))
+    .catch((err: {message: any}) => {
+      alert(err.message)
+    })
+    let newProduct: Product = Object.assign(await this.getProductById(product.id))
+    return newProduct
   }
 
   deleteProduct(id: string): Observable<boolean> {

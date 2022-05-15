@@ -83,7 +83,7 @@ export class ProductFormComponent implements OnInit {
         }
         
         this.shopService.updateProduct(this.product!)
-        .subscribe(res => {
+        .then(res => {
           if(res.id) {
             this.router.navigate(['/edit', {id: res.id}])
           } else {
