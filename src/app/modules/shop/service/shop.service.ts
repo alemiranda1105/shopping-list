@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { NewProduct, Product } from 'src/app/interfaces/Product';
 
 import { Firestore, DocumentData } from '@angular/fire/firestore';
-import { addDoc, collection, CollectionReference, doc, DocumentReference, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
+import { addDoc, collection, CollectionReference, deleteDoc, doc, DocumentReference, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +48,6 @@ export class ShopService {
   async updateProduct(product: Product): Promise<Product> {
     const toUpdate = doc(this.firestore, 'products', product.id)
     await updateDoc(toUpdate, {...product})
-    .then(res => console.log(res))
     .catch((err: {message: any}) => {
       alert(err.message)
     })
@@ -57,6 +56,11 @@ export class ShopService {
   }
 
   deleteProduct(id: string): Observable<boolean> {
+    const dataToDelete = doc(this.firestore, 'products', id)
+    deleteDoc(dataToDelete)
+    .catch((err: {message: any}) => {
+      alert(err.message)
+    })
     this.productLists = this.productLists.filter(p => p.id !== id)
     return of(true)
   }
