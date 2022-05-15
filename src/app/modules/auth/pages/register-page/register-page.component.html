@@ -1,0 +1,10 @@
+<div class="container">
+    <h1>Welcome to your shopping list</h1>
+    <p>
+        Already have an awesome account? Go ahead and click the button below to
+        sign in!
+    </p>
+    <button mat-button routerLink="/">Sign in</button>
+    <h5>Register to continue</h5>
+    <app-login-form (formData)="register($event)"></app-login-form>
+</div>

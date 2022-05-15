@@ -1,0 +1,27 @@
+<form class="form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="form-control">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="text" required />
+        <mat-error *ngIf="this.userForm.controls['email'].errors?.['required']">
+            Email is required
+        </mat-error>
+        <mat-error *ngIf="this.userForm.controls['email'].errors?.['email']">
+            Email isn't valid. Please enter a valid email.
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-control">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" required />
+        <mat-error *ngIf="this.userForm.controls['password'].errors?.['required']">
+            Password is required
+        </mat-error>
+        <mat-error *ngIf="this.userForm.controls['password'].errors?.['minlength']">
+            Password must be longer than 6 characters
+        </mat-error>
+    </mat-form-field>
+    <div class="form-footer">
+        <button [disabled]="userForm.invalid" mat-raised-button type="submit">
+            Login
+        </button>
+    </div>
+</form>
