@@ -1,4 +1,4 @@
-# TodoApp
+# ShoppingList
 
 Lista de productos creada para la asignatura de Desarrollo de Aplicaciones Web II.
 
